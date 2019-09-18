@@ -1,7 +1,7 @@
 laravel-admin extension 仿淘宝商品SKU排列组合
 ======
 
-![预览](https://github.com/xcalder/specifition-check/demo.png?raw=true)
+![预览](https://github.com/xcalder/specifition-check/blob/master/demo.png?raw=true)
 
 ##重要说明
 目前版本还不完善，仅做参考之用,
