@@ -1,16 +1,17 @@
 {
 	"name" : "xcalder/specifition-check",
-	"description" : "description...",
+	"description" : "laravel-admin Extensions",
 	"type" : "library",
 	"keywords" : [
 		"laravel-admin",
-		"extension"
+		"extension",
+		"product sku"
 	],
 	"homepage" : "https://github.com/xcalder/specifition-check",
 	"license" : "MIT",
 	"authors" : [{
-			"name" : "your name",
-			"email" : "your email"
+			"name" : "xcalder",
+			"email" : "xcalder@foxmail.com"
 		}
 	],
 	"require" : {
