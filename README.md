@@ -3,7 +3,7 @@ laravel-admin extension 仿淘宝商品SKU排列组合
 
 ![预览](https://github.com/xcalder/specifition-check/blob/master/demo.png?raw=true)
 
-##重要说明
+## 重要说明
 目前版本还不完善，仅做参考之用,
 
 ## 安装
@@ -37,7 +37,7 @@ sku 分表存放，需要在回调中处理sku数据
 	"selected": [{
 		"id": 1,
 		"product_id": 49,
-		"specifition_id": ["49", "101", "105"],
+		"specifition_id": "49,101,105",
 		"img": "4444",
 		"status": 1,
 		"price": 200,
@@ -49,25 +49,6 @@ sku 分表存放，需要在回调中处理sku数据
 		"note": "111111111",
 		"created_at": null,
 		"updated_at": null
-	}],
-	"selected_specifition": [{
-		"id": 49,
-		"group_id": 13,
-		"title": "spec-title1",
-		"value": "value131",
-		"status": 1
-	}, {
-		"id": 101,
-		"group_id": 26,
-		"title": "spec-title1",
-		"value": "value261",
-		"status": 1
-	}, {
-		"id": 105,
-		"group_id": 27,
-		"title": "spec-title1",
-		"value": "value271",
-		"status": 1
 	}],
 	"specifitions": [{
 		"id": 13,
