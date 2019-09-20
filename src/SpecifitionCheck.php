@@ -9,11 +9,11 @@ class SpecifitionCheck extends Field
     protected $view = 'specifition-check::index';
 
     protected static $css = [
-        'vendor/xcalder/specifition-check/css/liandong.css',
+        //'vendor/xcalder/specifition-check/css/liandong.css',
     ];
 
     protected static $js = [
-        'vendor/xcalder/specifition-check/js/liandong.js',
+        'vendor/xcalder/specifition-check/specifition-check.js',
     ];
     
     private $ajaxOptions;

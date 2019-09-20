@@ -84,9 +84,9 @@
                     var td = $("<th>" + item + "</th>");
                     td.appendTo(trHead);
                 });
-                var itemColumHead = $("<th style=\"width:70px;\">图片</th><th style=\"width:70px;\">市场价</th><th style=\"width:70px;\">价格</th><th style=\"width:70px;\">库存</th> ");
+                var itemColumHead = $("<th style=\"width:100px;\">图片</th><th style=\"width:100px;\">市场价</th><th style=\"width:100px;\">价格</th><th style=\"width:100px;\">库存</th> ");
                 itemColumHead.appendTo(trHead);
-                var itemColumHead2 = $("<td >商家编码</td><td >商品条形码</td><td style=\"width:70px;\">主单位换算</td><td style=\"width:70px;\">状态</td>");
+                var itemColumHead2 = $("<td style=\"width:120px;\">条形码</td><td style=\"width:100px;\">主单位换算</td><td style=\"width:100px;\">状态</td>");
                 itemColumHead2.appendTo(trHead);
                 var tbody = $("<tbody></tbody>");
                 tbody.appendTo(table);
@@ -103,29 +103,30 @@
                         $.each(td_array, function (i, values) {
                         	var value = JSON.parse(values);
                         	specifition_id += value.id+',';
-                            var td = $("<td >" + value.title + "</td>");
+                            var td = $("<td>" + value.title + "</td>");
+                            var tc = $('<input type="hidden" name="productsku['+index+'][specifition][]" value="'+value.title+'">');
+                            tc.appendTo(tr);
                             td.appendTo(tr);
                         });
                         specifition_id = specifition_id.replace(/^(\s|,)+|(\s|,)+$/g, '');
                         
-                        var td1 = $("<td ><input name=\"product_sku["+index+"][img]\" class=\"l-text form-control "+specifition_id+"-img\" type=\"text\" value=\"\"></td>");
+                        var td1 = $("<td ><input name=\"productsku["+index+"][img]\" data-id=\""+specifition_id+"-img\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td1.appendTo(tr);
-                        var td2 = $("<td ><input name=\"product_sku["+index+"][market_price]\" class=\"l-text form-control "+specifition_id+"-market_price\" type=\"text\" value=\"\"></td>");
+                        var td2 = $("<td ><input name=\"productsku["+index+"][market_price]\" data-id=\""+specifition_id+"-market_price\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td2.appendTo(tr);
-                        var td3 = $("<td ><input name=\"product_sku["+index+"][price]\" class=\"l-text form-control "+specifition_id+"-price\" type=\"text\" value=\"\"></td>");
+                        var td3 = $("<td ><input name=\"productsku["+index+"][price]\" data-id=\""+specifition_id+"-price\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td3.appendTo(tr);
-                        var td4 = $("<td ><input name=\"product_sku["+index+"][storage]\" class=\"l-text form-control "+specifition_id+"-storage\" type=\"text\" value=\"\"></td>");
+                        var td4 = $("<td ><input name=\"productsku["+index+"][storage]\" data-id=\""+specifition_id+"-storage\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td4.appendTo(tr);
-                        var td5 = $("<td ><input name=\"product_sku["+index+"][number]\" class=\"l-text form-control "+specifition_id+"-number\" type=\"text\" value=\"\"></td>");
+                        var td5 = $("<td ><input name=\"productsku["+index+"][code]\" data-id=\""+specifition_id+"-code\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td5.appendTo(tr);
-                        var td6 = $("<td ><input name=\"product_sku["+index+"][code]\" class=\"l-text form-control "+specifition_id+"-code\" type=\"text\" value=\"\"></td>");
+                        var td6 = $("<td ><input name=\"productsku["+index+"][to_unit]\" data-id=\""+specifition_id+"-to_unit\" class=\"l-text form-control\" type=\"text\" value=\"\"></td>");
                         td6.appendTo(tr);
-                        var td7 = $("<td ><input name=\"product_sku["+index+"][to_unit]\" class=\"l-text form-control "+specifition_id+"-to_unit\" type=\"text\" value=\"\"></td>");
+                        var td7 = $("<td ><select name=\"productsku["+index+"][status]\" data-id=\""+specifition_id+"-status\" class=\"l-text form-control\"><option value=\"0\" selected>下架</option><option value=\"1\">上架</option></select><input name=\"productsku["+index+"][specifition_id]\" data-id=\""+specifition_id+"-specifition_id\" type=\"hidden\" value=\""+specifition_id+"\"></td>");
                         td7.appendTo(tr);
-                        var td8 = $("<td ><input name=\"product_sku["+index+"][status]\" class=\"l-text form-control "+specifition_id+"-status\" type=\"text\" value=\"\"><input type=\"hidden\" name=\"product_sku["+index+"][id]\" value=\"0\" class=\"l-text form-control "+specifition_id+"-id\"/><input name=\"product_sku["+index+"][specifition_id]\" type=\"hidden\" value=\""+specifition_id+"\"></td>");
-                        td8.appendTo(tr);
                     });
                 }
+                
                 //结束创建Table表
                 arrayColumn.pop();//删除数组中最后一项
                 //合并单元格
@@ -137,6 +138,8 @@
                 //未全选中,清除表格
                 $('.productsku-table').html('');
             }
+            
+            this.setSelected();
         },
         
         hebingFunction: function(){
@@ -228,6 +231,25 @@
             else {
                 return doubleArrays[0];
             }
+        },
+        setSelected: function(){
+        	if(this.options.selected.length == 0){
+        		return false;
+        	}
+        	for(var i in this.options.selected){
+        		var selected = this.options.selected[i];
+        		var id = selected.specifition_id;
+        		$('input[data-id="'+id+'-market_price"]').val(selected.market_price);
+        		$('input[data-id="'+id+'-price"]').val(selected.price);
+        		$('input[data-id="'+id+'-storage"]').val(selected.storage);
+        		$('input[data-id="'+id+'-code"]').val(selected.code);
+        		$('input[data-id="'+id+'-to_unit"]').val(selected.to_unit);
+        		$('input[data-id="'+id+'-specifition_id"]').val(id);
+        		$('input[data-id="'+id+'-img"]').val(selected.img);
+        		$('select[data-id="'+id+'-status"]').val(selected.status);
+        		console.log($('input[data-id="'+id+'-price"]'))
+        	}
+        	console.log(123)
         }
     }
 	
@@ -236,6 +258,7 @@
         //调用其方法
         sku.setCheckbox();
         sku.setTable();
+        //sku.setSelected();
         return true;
 	}
 })();
